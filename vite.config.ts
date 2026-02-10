@@ -4,7 +4,9 @@ import path from "path";
 import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
+// Para GitHub Pages: a URL será https://<seu-usuario>.github.io/mob-parceiros/
 export default defineConfig(({ mode }) => ({
+  base: process.env.BASE_PATH ?? "/",
   server: {
     host: "::",
     port: 8080,
