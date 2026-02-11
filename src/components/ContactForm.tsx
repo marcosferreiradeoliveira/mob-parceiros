@@ -40,12 +40,11 @@ const ContactForm = () => {
           className="max-w-xl mx-auto"
         >
           <div className="text-center mb-10">
-            <span className="text-sm font-mono text-primary uppercase tracking-widest">Próximo passo</span>
             <h2 className="text-3xl md:text-4xl font-bold mt-3 mb-3">
-              Solicite uma proposta <span className="text-gradient">técnica hoje.</span>
+              Tem um projeto complexo no pipeline? Vamos tirar do papel.
             </h2>
-            <p className="text-muted-foreground">
-              Garantimos sigilo total e entrega White Label.
+            <p className="text-muted-foreground text-sm">
+              Campos simples. Resposta rápida.
             </p>
           </div>
 
@@ -83,7 +82,7 @@ const ContactForm = () => {
 
             <div>
               <label className="block text-sm font-medium text-muted-foreground mb-2">
-                Qual a demanda atual?
+                Tipo de demanda
               </label>
               <select
                 value={form.demanda}
@@ -99,7 +98,7 @@ const ContactForm = () => {
 
             <div>
               <label className="block text-sm font-medium text-muted-foreground mb-2">
-                WhatsApp para contato rápido
+                WhatsApp
               </label>
               <input
                 type="tel"

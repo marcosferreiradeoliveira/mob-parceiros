@@ -62,14 +62,25 @@ This project is built with:
 
 ## How can I deploy this project?
 
-Opções **gratuitas** (o projeto já está configurado para Vercel e Netlify):
+### Vercel em mobcontent.com.br/landing (sem mexer na home)
 
-### Vercel (recomendado)
+Para servir esta landing em **mobcontent.com.br/landing** e manter a home em **mobcontent.com.br**:
+
+1. **Este repositório**: faça deploy na Vercel como projeto separado. O `vercel.json` já usa `build:landing` e gera o site em `/landing`. Anote a URL do deploy (ex.: `https://mob-parceiros-xxx.vercel.app`).
+2. **Site principal (mobcontent.com.br)**: no projeto Vercel do site principal, adicione rewrites apontando `/landing` e `/landing/*` para a URL do passo 1. Passo a passo e exemplo de `vercel.json`: [docs/vercel-rewrite-main-site.md](docs/vercel-rewrite-main-site.md).
+
+Resultado: **mobcontent.com.br** = home atual; **mobcontent.com.br/landing** = esta landing.
+
+---
+
+Outras opções **gratuitas**:
+
+### Vercel (deploy em subdomínio ou root)
 - Plano gratuito generoso, deploy automático pelo GitHub.
 1. Acesse [vercel.com](https://vercel.com) e faça login com GitHub.
 2. **Add New Project** → importe o repositório `mob-parceiros`.
-3. Deixe **Build Command**: `npm run build` e **Output**: `dist` (já vêm do `vercel.json`).
-4. Deploy. O site fica em `https://mob-parceiros-xxx.vercel.app` (e pode usar domínio próprio).
+3. Para **mobcontent.com.br/landing**: use o `vercel.json` atual (já configurado). Para deploy na raiz de outro domínio, em Settings altere Build Command para `npm run build` e ajuste os rewrites.
+4. Deploy. O site fica em `https://mob-parceiros-xxx.vercel.app/landing` (ou na raiz, conforme a config).
 
 ### Netlify
 - Também gratuito, integração direta com Git.

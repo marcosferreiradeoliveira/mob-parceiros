@@ -1,11 +1,11 @@
 import StickyHeader from "@/components/StickyHeader";
 import HeroSection from "@/components/HeroSection";
 import LogosSection from "@/components/LogosSection";
-import CasesSection from "@/components/CasesSection";
-import MidConversion from "@/components/MidConversion";
 import WhyMobSection from "@/components/WhyMobSection";
+import CasesSection from "@/components/CasesSection";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
+import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 
 const Index = () => {
   return (
@@ -13,11 +13,11 @@ const Index = () => {
       <StickyHeader />
       <HeroSection />
       <LogosSection />
-      <CasesSection />
-      <MidConversion />
       <WhyMobSection />
+      <CasesSection />
       <ContactForm />
       <Footer />
+      <FloatingWhatsApp />
     </div>
   );
 };

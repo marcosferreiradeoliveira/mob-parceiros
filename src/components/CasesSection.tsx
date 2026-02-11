@@ -1,24 +1,25 @@
 import { motion } from "framer-motion";
 import { Brain, Gamepad2, BarChart3 } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const cases = [
   {
     icon: Brain,
     tag: "Saúde & Tech",
-    title: "App de Assistente Literário para pacientes psiquiátricos",
+    title: "App de Assistente Literário",
     description: "Solução com IA que conecta literatura e saúde mental, oferecendo suporte personalizado via interface intuitiva.",
   },
   {
     icon: Gamepad2,
     tag: "Inovação & Games",
-    title: "Serious Game com agentes de IA e vídeos generativos",
-    description: "Gamificação avançada com inteligência artificial autônoma e geração de conteúdo visual em tempo real.",
+    title: "Serious Game com IA",
+    description: "Gamificação avançada com agentes de IA e vídeos generativos em tempo real.",
   },
   {
     icon: BarChart3,
     tag: "Sistemas & Gestão",
-    title: "Plataforma de Avaliação de Projetos Culturais com análise via IA",
-    description: "Dashboard inteligente que automatiza a avaliação e gestão de projetos culturais com analytics preditivo.",
+    title: "Dashboard de avaliação cultural",
+    description: "Plataforma de avaliação de projetos culturais com análise via IA e analytics preditivo.",
   },
 ];
 
@@ -35,7 +36,7 @@ const CasesSection = () => {
         >
           <span className="text-sm font-mono text-primary uppercase tracking-widest">Portfólio</span>
           <h2 className="text-3xl md:text-4xl font-bold mt-3">
-            Cases que provam a <span className="text-gradient">engenharia</span>
+            Cases em destaque
           </h2>
         </motion.div>
 
@@ -54,7 +55,10 @@ const CasesSection = () => {
               </div>
               <span className="text-xs font-mono text-primary uppercase tracking-wider mb-3">{c.tag}</span>
               <h3 className="text-lg font-bold mb-3 leading-snug">{c.title}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed flex-1">{c.description}</p>
+              <p className="text-sm text-muted-foreground leading-relaxed flex-1 mb-6">{c.description}</p>
+              <Button variant="glow-outline" size="sm" className="w-fit" asChild>
+                <a href="#formulario">Ver Case Completo</a>
+              </Button>
             </motion.div>
           ))}
         </div>

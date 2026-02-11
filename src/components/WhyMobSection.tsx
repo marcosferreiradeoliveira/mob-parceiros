@@ -1,7 +1,12 @@
 import { motion } from "framer-motion";
-import { Cpu, Eye, BadgeDollarSign, Puzzle } from "lucide-react";
+import { Cpu, Eye, BadgeDollarSign, Puzzle, Sparkles } from "lucide-react";
 
 const benefits = [
+  {
+    icon: Sparkles,
+    title: "IA como ferramenta de escala",
+    desc: "Tecnologia de ponta para entregar mais, com qualidade de especialista.",
+  },
   {
     icon: Puzzle,
     title: "Modelo White Label",
@@ -9,8 +14,8 @@ const benefits = [
   },
   {
     icon: Eye,
-    title: "Entrega de alta fidelidade",
-    desc: "Pixel perfect. Design e código na mesma página, sempre.",
+    title: "Entrega pixel perfect",
+    desc: "Design e código na mesma página, sempre.",
   },
   {
     icon: BadgeDollarSign,
@@ -19,7 +24,7 @@ const benefits = [
   },
   {
     icon: Cpu,
-    title: "Especialistas no 'impossível'",
+    title: "Especialistas no impossível",
     desc: "Projetos que ninguém sabe como fazer? É com a gente.",
   },
 ];
@@ -33,31 +38,28 @@ const WhyMobSection = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-14"
         >
           <span className="text-sm font-mono text-primary uppercase tracking-widest">Diferenciais</span>
           <h2 className="text-3xl md:text-4xl font-bold mt-3 mb-4">Por que a Mob?</h2>
-          <p className="text-lg text-muted-foreground max-w-xl mx-auto">
-            <span className="text-gradient font-semibold">IA não é o futuro, é nossa ferramenta de escala.</span>
-          </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
           {benefits.map((b, i) => (
             <motion.div
               key={b.title}
-              initial={{ opacity: 0, x: i % 2 === 0 ? -20 : 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="flex gap-5 items-start p-6 rounded-xl border border-border bg-card card-glow"
+              transition={{ delay: i * 0.08 }}
+              className="flex gap-4 items-start p-5 rounded-xl border border-border bg-card card-glow"
             >
-              <div className="w-11 h-11 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
+              <div className="w-10 h-10 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
                 <b.icon className="text-primary" size={20} />
               </div>
-              <div>
-                <h3 className="font-bold mb-1">{b.title}</h3>
-                <p className="text-sm text-muted-foreground">{b.desc}</p>
+              <div className="min-w-0">
+                <h3 className="font-bold text-sm mb-0.5">{b.title}</h3>
+                <p className="text-xs text-muted-foreground leading-snug">{b.desc}</p>
               </div>
             </motion.div>
           ))}
