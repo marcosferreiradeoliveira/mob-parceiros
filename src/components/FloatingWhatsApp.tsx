@@ -11,7 +11,7 @@ const FloatingWhatsApp = () => {
       href={url}
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-6 right-6 z-50 flex items-center gap-2 rounded-full bg-orange-500 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-orange-500/30 transition-all hover:bg-orange-600 hover:shadow-orange-500/40 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-offset-2 focus:ring-offset-background"
+      className="fixed bottom-6 right-6 z-50 flex items-center gap-2 rounded-full bg-warm px-5 py-3 text-sm font-semibold text-warm-foreground shadow-lg transition-all hover:bg-warm/90 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-warm focus:ring-offset-2 focus:ring-offset-background hover:shadow-[0_0_24px_hsl(var(--glow-warm)/0.35)]"
       aria-label="Quero ser Parceiro via WhatsApp"
     >
       <MessageCircle size={20} />

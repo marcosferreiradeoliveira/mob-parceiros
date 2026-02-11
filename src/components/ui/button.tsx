@@ -16,7 +16,9 @@ const buttonVariants = cva(
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
         glow: "bg-primary text-primary-foreground font-semibold glow-btn rounded-lg",
+        warm: "bg-warm text-warm-foreground font-semibold glow-btn-warm rounded-lg hover:bg-warm/90",
         "glow-outline": "border border-primary/40 text-primary hover:bg-primary/10 glow-btn rounded-lg",
+        "warm-outline": "border border-warm/50 text-warm hover:bg-warm/10 rounded-lg transition-all hover:shadow-[0_0_20px_hsl(var(--glow-warm)/0.2)]",
       },
       size: {
         default: "h-10 px-4 py-2",

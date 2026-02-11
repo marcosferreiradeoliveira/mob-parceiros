@@ -33,7 +33,7 @@ const StickyHeader = () => {
         <nav className="hidden md:flex items-center gap-8">
           <a href="#cases" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Cases</a>
           <a href="#por-que" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Por que a Mob?</a>
-          <Button variant="glow" size="sm" onClick={scrollToForm}>
+          <Button variant="warm" size="sm" onClick={scrollToForm}>
             Orçamento Rápido
           </Button>
         </nav>
@@ -54,7 +54,7 @@ const StickyHeader = () => {
             <div className="flex flex-col gap-4 p-6">
               <a href="#cases" onClick={() => setMenuOpen(false)} className="text-muted-foreground hover:text-foreground">Cases</a>
               <a href="#por-que" onClick={() => setMenuOpen(false)} className="text-muted-foreground hover:text-foreground">Por que a Mob?</a>
-              <Button variant="glow" onClick={scrollToForm}>Orçamento Rápido</Button>
+              <Button variant="warm" onClick={scrollToForm}>Orçamento Rápido</Button>
             </div>
           </motion.div>
         )}

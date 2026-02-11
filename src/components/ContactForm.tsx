@@ -15,22 +15,35 @@ const ContactForm = () => {
   });
   const [submitting, setSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.nome || !form.agencia || !form.demanda || !form.whatsapp) {
       toast.error("Por favor, preencha todos os campos.");
       return;
     }
     setSubmitting(true);
-    setTimeout(() => {
-      setSubmitting(false);
+    try {
+      const res = await fetch("/api/send-proposta", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        toast.error(data.error || "Falha ao enviar. Tente novamente.");
+        return;
+      }
       toast.success("Proposta solicitada! Entraremos em contato em breve.");
       setForm({ nome: "", agencia: "", demanda: "", whatsapp: "" });
-    }, 1500);
+    } catch {
+      toast.error("Erro de conexão. Tente novamente.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
-    <section id="formulario" className="py-24 relative">
+    <section id="formulario" className="py-24 relative bg-secondary/40">
       <div className="absolute inset-0 radial-form pointer-events-none" />
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
@@ -43,8 +56,11 @@ const ContactForm = () => {
             <h2 className="text-3xl md:text-4xl font-bold mt-3 mb-3">
               Tem um projeto complexo no pipeline? Vamos tirar do papel.
             </h2>
-            <p className="text-muted-foreground text-sm">
-              Campos simples. Resposta rápida.
+            <p className="text-muted-foreground mb-2">
+              Receba uma proposta técnica inicial em até 24 horas. Sem compromisso.
+            </p>
+            <p className="text-sm text-muted-foreground/90">
+              Estamos abrindo poucas parcerias novas por mês para manter a qualidade de entrega.
             </p>
           </div>
 
@@ -52,9 +68,10 @@ const ContactForm = () => {
             onSubmit={handleSubmit}
             className="rounded-2xl border border-border bg-card p-8 md:p-10 space-y-5 card-glow"
           >
+            <p className="text-sm font-mono text-warm uppercase tracking-widest mb-4">Formulário</p>
             <div>
               <label className="block text-sm font-medium text-muted-foreground mb-2">
-                Nome do Decisor
+                Nome do decisor
               </label>
               <input
                 type="text"
@@ -68,7 +85,7 @@ const ContactForm = () => {
 
             <div>
               <label className="block text-sm font-medium text-muted-foreground mb-2">
-                Nome da Agência
+                Nome da agência
               </label>
               <input
                 type="text"
@@ -112,7 +129,7 @@ const ContactForm = () => {
 
             <Button
               type="submit"
-              variant="glow"
+              variant="warm"
               size="lg"
               className="w-full text-base py-6 mt-2"
               disabled={submitting}
@@ -122,13 +139,13 @@ const ContactForm = () => {
               ) : (
                 <>
                   <Send size={18} />
-                  Solicitar Proposta Técnica
+                  Solicitar proposta técnica
                 </>
               )}
             </Button>
 
             <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground pt-2">
-              <ShieldCheck size={14} className="text-primary" />
+              <ShieldCheck size={14} className="text-warm" />
               <span>Seus dados estão seguros. Sigilo total garantido.</span>
             </div>
           </form>
