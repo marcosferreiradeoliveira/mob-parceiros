@@ -1,4 +1,4 @@
-type ApiRequest = { method?: string; body?: { nome?: string; agencia?: string; demanda?: string; whatsapp?: string; descritivo?: string } };
+type ApiRequest = { method?: string; body?: { nome?: string; agencia?: string; demanda?: string; whatsapp?: string; email?: string; descritivo?: string } };
 type ApiResponse = { status: (n: number) => ApiResponse; json: (o: object) => void };
 
 const BREVO_API_URL = "https://api.brevo.com/v3/smtp/email";
@@ -15,7 +15,7 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
     return res.status(500).json({ error: "Configuração do servidor incompleta" });
   }
 
-  const { nome, agencia, demanda, whatsapp, descritivo } = req.body || {};
+  const { nome, agencia, demanda, whatsapp, email, descritivo } = req.body || {};
   if (!nome || !agencia || !demanda || !whatsapp) {
     return res.status(400).json({
       error: "Preencha todos os campos: nome, agência, demanda e WhatsApp.",
@@ -25,6 +25,9 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
   const senderEmail = process.env.BREVO_SENDER_EMAIL || TO_EMAIL;
   const senderName = process.env.BREVO_SENDER_NAME || "Landing Mob Parceiros";
 
+  const emailBlock = email
+    ? `<p><strong>E-mail:</strong> ${escapeHtml(email)}</p>`
+    : "";
   const descritivoBlock = descritivo
     ? `<p><strong>Descritivo:</strong></p><p>${escapeHtml(descritivo).replace(/\n/g, "<br>")}</p>`
     : "";
@@ -35,6 +38,7 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
     <p><strong>Agência:</strong> ${escapeHtml(agencia)}</p>
     <p><strong>Tipo de demanda:</strong> ${escapeHtml(demanda)}</p>
     <p><strong>WhatsApp:</strong> ${escapeHtml(whatsapp)}</p>
+    ${emailBlock}
     ${descritivoBlock}
     <hr>
     <p><em>Enviado pelo formulário da landing Mob Parceiros.</em></p>

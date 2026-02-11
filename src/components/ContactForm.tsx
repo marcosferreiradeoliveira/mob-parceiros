@@ -12,6 +12,7 @@ const ContactForm = () => {
     agencia: "",
     demanda: "",
     whatsapp: "",
+    email: "",
     descritivo: "",
   });
   const [submitting, setSubmitting] = useState(false);
@@ -48,7 +49,7 @@ const ContactForm = () => {
         tipo_demanda: form.demanda,
         tem_descritivo: !!form.descritivo,
       });
-      setForm({ nome: "", agencia: "", demanda: "", whatsapp: "", descritivo: "" });
+      setForm({ nome: "", agencia: "", demanda: "", whatsapp: "", email: "", descritivo: "" });
     } catch {
       toast.error("Erro de conexão. Tente novamente.");
       window.mixpanel?.track("Formulário - Erro de conexão", { tipo_demanda: form.demanda });
@@ -138,6 +139,20 @@ const ContactForm = () => {
                 onChange={(e) => setForm({ ...form, whatsapp: e.target.value })}
                 placeholder="(11) 99999-9999"
                 maxLength={20}
+                className="w-full rounded-lg border border-border bg-secondary/50 px-4 py-3 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-muted-foreground mb-2">
+                E-mail <span className="text-muted-foreground/70 font-normal">(opcional)</span>
+              </label>
+              <input
+                type="email"
+                value={form.email}
+                onChange={(e) => setForm({ ...form, email: e.target.value })}
+                placeholder="seu@email.com"
+                maxLength={120}
                 className="w-full rounded-lg border border-border bg-secondary/50 px-4 py-3 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
               />
             </div>
