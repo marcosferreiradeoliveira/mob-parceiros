@@ -25,7 +25,7 @@ const HeroSection = () => {
             O parceiro técnico que permite sua agência vender projetos maiores
           </h1>
           <p className="text-base md:text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto mb-2 md:mb-4 leading-relaxed">
-            Sua agência fecha o contrato. A Mob executa — vídeos, plataformas e apps com velocidade e padrão de especialista.
+            Sua agência fecha o contrato. A Mob executa — multimídia, plataformas e apps com velocidade e padrão de especialista.
           </p>
           <p className="text-sm md:text-base text-muted-foreground/90 max-w-xl mx-auto mb-6 md:mb-8">
             Sem equipe interna. Sem custo fixo. White-label total.
@@ -60,7 +60,7 @@ const HeroSection = () => {
         >
           <img
             src={heroImage}
-            alt="Mockups de produtos digitais: app mobile, dashboard web e interface de vídeo"
+            alt="Mockups de produtos digitais: app mobile, dashboard web e interface multimídia"
             className="w-full h-full object-contain object-center"
           />
         </motion.div>

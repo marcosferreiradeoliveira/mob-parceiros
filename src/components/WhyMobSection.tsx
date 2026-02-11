@@ -54,7 +54,7 @@ const WhyMobSection = () => {
         >
           <img
             src={iaConceitural}
-            alt="Visualização de IA aplicada a software e produção de vídeo"
+            alt="Visualização de IA aplicada a software e produção multimídia"
             className="w-full h-full max-h-[200px] object-cover object-top"
           />
         </motion.div>

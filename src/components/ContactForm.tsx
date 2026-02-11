@@ -4,7 +4,7 @@ import { Send, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 
-const demandas = ["Vídeo com IA", "Site/Plataforma", "App/Software", "Outros"];
+const demandas = ["Multimídia com IA", "Site/Plataforma", "App/Software", "Outros"];
 
 const ContactForm = () => {
   const [form, setForm] = useState({
@@ -12,6 +12,7 @@ const ContactForm = () => {
     agencia: "",
     demanda: "",
     whatsapp: "",
+    descritivo: "",
   });
   const [submitting, setSubmitting] = useState(false);
 
@@ -19,9 +20,14 @@ const ContactForm = () => {
     e.preventDefault();
     if (!form.nome || !form.agencia || !form.demanda || !form.whatsapp) {
       toast.error("Por favor, preencha todos os campos.");
+      window.mixpanel?.track("Formulário - Validação falhou", { campo: "obrigatórios" });
       return;
     }
     setSubmitting(true);
+    window.mixpanel?.track("Formulário - Envio iniciado", {
+      tipo_demanda: form.demanda,
+      tem_descritivo: !!form.descritivo,
+    });
     try {
       const res = await fetch("/api/send-proposta", {
         method: "POST",
@@ -31,12 +37,21 @@ const ContactForm = () => {
       const data = await res.json().catch(() => ({}));
       if (!res.ok) {
         toast.error(data.error || "Falha ao enviar. Tente novamente.");
+        window.mixpanel?.track("Formulário - Envio falhou", {
+          tipo_demanda: form.demanda,
+          status: res.status,
+        });
         return;
       }
       toast.success("Proposta solicitada! Entraremos em contato em breve.");
-      setForm({ nome: "", agencia: "", demanda: "", whatsapp: "" });
+      window.mixpanel?.track("Formulário - Proposta enviada", {
+        tipo_demanda: form.demanda,
+        tem_descritivo: !!form.descritivo,
+      });
+      setForm({ nome: "", agencia: "", demanda: "", whatsapp: "", descritivo: "" });
     } catch {
       toast.error("Erro de conexão. Tente novamente.");
+      window.mixpanel?.track("Formulário - Erro de conexão", { tipo_demanda: form.demanda });
     } finally {
       setSubmitting(false);
     }
@@ -124,6 +139,20 @@ const ContactForm = () => {
                 placeholder="(11) 99999-9999"
                 maxLength={20}
                 className="w-full rounded-lg border border-border bg-secondary/50 px-4 py-3 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-muted-foreground mb-2">
+                Descritivo
+              </label>
+              <textarea
+                value={form.descritivo}
+                onChange={(e) => setForm({ ...form, descritivo: e.target.value })}
+                placeholder="Descreva brevemente o projeto ou a necessidade..."
+                rows={4}
+                maxLength={2000}
+                className="w-full rounded-lg border border-border bg-secondary/50 px-4 py-3 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all resize-y min-h-[100px]"
               />
             </div>
 

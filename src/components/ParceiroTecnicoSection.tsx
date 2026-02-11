@@ -44,7 +44,7 @@ const ParceiroTecnicoSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          A Mob entra como seu braço técnico — em sigilo total.
+          A Mob entra como seu braço técnico.
         </motion.p>
       </div>
     </section>
