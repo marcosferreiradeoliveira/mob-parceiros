@@ -31,10 +31,12 @@ const StickyHeader = () => {
         </a>
 
         <nav className="hidden md:flex items-center gap-8">
+          <a href="#dores" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Dores</a>
+          <a href="#o-que-fazemos" className="text-sm text-muted-foreground hover:text-foreground transition-colors">O que fazemos</a>
+          <a href="#como-funciona" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Como funciona</a>
           <a href="#cases" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Cases</a>
-          <a href="#por-que" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Por que a Mob?</a>
           <Button variant="warm" size="sm" onClick={scrollToForm}>
-            Orçamento Rápido
+            Quero proposta em até 24h
           </Button>
         </nav>
 
@@ -52,9 +54,11 @@ const StickyHeader = () => {
             className="md:hidden bg-background/95 backdrop-blur-xl border-b border-border"
           >
             <div className="flex flex-col gap-4 p-6">
+              <a href="#dores" onClick={() => setMenuOpen(false)} className="text-muted-foreground hover:text-foreground">Dores</a>
+              <a href="#o-que-fazemos" onClick={() => setMenuOpen(false)} className="text-muted-foreground hover:text-foreground">O que fazemos</a>
+              <a href="#como-funciona" onClick={() => setMenuOpen(false)} className="text-muted-foreground hover:text-foreground">Como funciona</a>
               <a href="#cases" onClick={() => setMenuOpen(false)} className="text-muted-foreground hover:text-foreground">Cases</a>
-              <a href="#por-que" onClick={() => setMenuOpen(false)} className="text-muted-foreground hover:text-foreground">Por que a Mob?</a>
-              <Button variant="warm" onClick={scrollToForm}>Orçamento Rápido</Button>
+              <Button variant="warm" onClick={scrollToForm}>Quero proposta em até 24h</Button>
             </div>
           </motion.div>
         )}

@@ -26,7 +26,7 @@ const benefits = [
   {
     icon: Cpu,
     title: "Especialistas no impossível",
-    desc: "Projetos que ninguém sabe como fazer? É com a gente.",
+    desc: "Integrações complexas, IA generativa, jogos sérios, plataformas de avaliação. Projetos que ninguém sabe como fazer? É com a gente.",
   },
 ];
 

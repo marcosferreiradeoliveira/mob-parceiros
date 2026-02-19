@@ -1,10 +1,10 @@
 import { motion } from "framer-motion";
 
 const logos = [
-  { name: "Fundação Roberto Marinho" },
-  { name: "Museu da Língua Portuguesa" },
-  { name: "Alter Comunicação" },
-  { name: "Conservação Internacional" },
+  { name: "Fundação Roberto Marinho", quote: "Fechamos projetos de multimídia e exposição que não conseguiríamos executar sozinhos." },
+  { name: "Museu da Língua Portuguesa", quote: "Parceria que permitiu entregar mais de 100 vídeos com o padrão que o museu exige." },
+  { name: "Alter Comunicação", quote: "Nosso braço técnico em IA e plataformas; o cliente acha que é tudo nosso." },
+  { name: "Conservação Internacional", quote: "Apps e jogos sérios que aumentaram o alcance das nossas campanhas." },
 ];
 
 const LogosSection = () => {
@@ -14,7 +14,7 @@ const LogosSection = () => {
         <p className="text-center text-sm font-mono text-muted-foreground uppercase tracking-widest mb-10">
           Parceiro estratégico de quem dita o mercado
         </p>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 items-center justify-items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
           {logos.map((logo, i) => (
             <motion.div
               key={logo.name}
@@ -22,9 +22,12 @@ const LogosSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="flex items-center justify-center px-6 py-5 rounded-xl w-full max-w-[220px] h-24 bg-background/80 border border-border/60 shadow-sm hover:shadow-md hover:border-border transition-all duration-200"
+              className="flex flex-col justify-between px-6 py-5 rounded-xl w-full max-w-[280px] mx-auto bg-background/80 border border-border/60 shadow-sm hover:shadow-md hover:border-border transition-all duration-200"
             >
-              <span className="text-xs font-semibold text-muted-foreground text-center leading-tight tracking-tight">
+              <p className="text-sm text-muted-foreground italic leading-snug mb-4 flex-1">
+                &ldquo;{logo.quote}&rdquo;
+              </p>
+              <span className="text-xs font-semibold text-foreground/80 text-center leading-tight tracking-tight">
                 {logo.name}
               </span>
             </motion.div>

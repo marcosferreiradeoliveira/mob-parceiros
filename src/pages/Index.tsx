@@ -1,10 +1,10 @@
 import StickyHeader from "@/components/StickyHeader";
 import HeroSection from "@/components/HeroSection";
 import ParceiroTecnicoSection from "@/components/ParceiroTecnicoSection";
+import OQueFazemosSection from "@/components/OQueFazemosSection";
 import ComoFuncionaSection from "@/components/ComoFuncionaSection";
-import LogosSection from "@/components/LogosSection";
-import WhyMobSection from "@/components/WhyMobSection";
 import CasesSection from "@/components/CasesSection";
+import DepoimentosSection from "@/components/DepoimentosSection";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
@@ -15,10 +15,10 @@ const Index = () => {
       <StickyHeader />
       <HeroSection />
       <ParceiroTecnicoSection />
+      <OQueFazemosSection />
       <ComoFuncionaSection />
-      <LogosSection />
-      <WhyMobSection />
       <CasesSection />
+      <DepoimentosSection />
       <ContactForm />
       <Footer />
       <FloatingWhatsApp />

@@ -16,11 +16,12 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
   }
 
   const { nome, agencia, demanda, whatsapp, email, descritivo } = req.body || {};
-  if (!nome || !agencia || !demanda || !whatsapp) {
+  if (!nome || !demanda || !whatsapp) {
     return res.status(400).json({
-      error: "Preencha todos os campos: nome, agência, demanda e WhatsApp.",
+      error: "Preencha nome, tipo de demanda e WhatsApp.",
     });
   }
+  const agenciaVal = agencia?.trim() || "Não informado";
 
   const senderEmail = process.env.BREVO_SENDER_EMAIL || TO_EMAIL;
   const senderName = process.env.BREVO_SENDER_NAME || "Landing Mob Parceiros";
@@ -35,7 +36,7 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
   const htmlContent = `
     <h2>Nova solicitação de proposta técnica</h2>
     <p><strong>Nome do decisor:</strong> ${escapeHtml(nome)}</p>
-    <p><strong>Agência:</strong> ${escapeHtml(agencia)}</p>
+    <p><strong>Agência:</strong> ${escapeHtml(agenciaVal)}</p>
     <p><strong>Tipo de demanda:</strong> ${escapeHtml(demanda)}</p>
     <p><strong>WhatsApp:</strong> ${escapeHtml(whatsapp)}</p>
     ${emailBlock}
@@ -54,7 +55,7 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
       body: JSON.stringify({
         sender: { email: senderEmail, name: senderName },
         to: [{ email: TO_EMAIL, name: "Marcos Ferreira" }],
-        subject: `[Landing] Proposta técnica – ${escapeHtml(agencia)}`,
+        subject: `[Landing] Proposta técnica – ${escapeHtml(agenciaVal)}`,
         htmlContent,
       }),
     });

@@ -1,26 +1,30 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Send, ShieldCheck } from "lucide-react";
+import { Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 
-const demandas = ["Multimídia com IA", "Site/Plataforma", "App/Software", "Outros"];
+const tiposProjeto = [
+  "Site",
+  "App/Plataforma",
+  "Multimídia/IA",
+  "Outro",
+];
 
 const ContactForm = () => {
   const [form, setForm] = useState({
     nome: "",
-    agencia: "",
-    demanda: "",
     whatsapp: "",
     email: "",
+    demanda: "",
     descritivo: "",
   });
   const [submitting, setSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.nome || !form.agencia || !form.demanda || !form.whatsapp) {
-      toast.error("Por favor, preencha todos os campos.");
+    if (!form.nome || !form.demanda || !form.whatsapp) {
+      toast.error("Preencha nome, tipo de projeto e WhatsApp.");
       window.mixpanel?.track("Formulário - Validação falhou", { campo: "obrigatórios" });
       return;
     }
@@ -33,7 +37,13 @@ const ContactForm = () => {
       const res = await fetch("/api/send-proposta", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({
+          nome: form.nome,
+          demanda: form.demanda,
+          whatsapp: form.whatsapp,
+          email: form.email,
+          descritivo: form.descritivo,
+        }),
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) {
@@ -49,7 +59,7 @@ const ContactForm = () => {
         tipo_demanda: form.demanda,
         tem_descritivo: !!form.descritivo,
       });
-      setForm({ nome: "", agencia: "", demanda: "", whatsapp: "", email: "", descritivo: "" });
+      setForm({ nome: "", whatsapp: "", email: "", demanda: "", descritivo: "" });
     } catch {
       toast.error("Erro de conexão. Tente novamente.");
       window.mixpanel?.track("Formulário - Erro de conexão", { tipo_demanda: form.demanda });
@@ -70,69 +80,28 @@ const ContactForm = () => {
         >
           <div className="text-center mb-10">
             <h2 className="text-3xl md:text-4xl font-bold mt-3 mb-3">
-              Tem um projeto complexo no pipeline? Vamos tirar do papel.
+              Conte o projeto que está no seu pipeline
             </h2>
-            <p className="text-muted-foreground mb-2">
-              Receba uma proposta técnica inicial em até 24 horas. Sem compromisso.
-            </p>
-            <p className="text-sm text-muted-foreground/90">
-              Estamos abrindo poucas parcerias novas por mês para manter a qualidade de entrega.
-            </p>
           </div>
 
           <form
             onSubmit={handleSubmit}
             className="rounded-2xl border border-border bg-card p-8 md:p-10 space-y-5 card-glow"
           >
-            <p className="text-sm font-mono text-warm uppercase tracking-widest mb-4">Formulário</p>
             <div>
-              <label className="block text-sm font-medium text-muted-foreground mb-2">
-                Nome do decisor
-              </label>
+              <label className="block text-sm font-medium text-muted-foreground mb-2">Nome</label>
               <input
                 type="text"
                 value={form.nome}
                 onChange={(e) => setForm({ ...form, nome: e.target.value })}
-                placeholder="Seu nome completo"
+                placeholder="Seu nome"
                 maxLength={100}
                 className="w-full rounded-lg border border-border bg-secondary/50 px-4 py-3 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-muted-foreground mb-2">
-                Nome da agência
-              </label>
-              <input
-                type="text"
-                value={form.agencia}
-                onChange={(e) => setForm({ ...form, agencia: e.target.value })}
-                placeholder="Nome da sua agência"
-                maxLength={100}
-                className="w-full rounded-lg border border-border bg-secondary/50 px-4 py-3 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-muted-foreground mb-2">
-                Tipo de demanda
-              </label>
-              <select
-                value={form.demanda}
-                onChange={(e) => setForm({ ...form, demanda: e.target.value })}
-                className="w-full rounded-lg border border-border bg-secondary/50 px-4 py-3 text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all appearance-none"
-              >
-                <option value="" className="bg-card text-muted-foreground">Selecione uma opção</option>
-                {demandas.map((d) => (
-                  <option key={d} value={d} className="bg-card text-foreground">{d}</option>
-                ))}
-              </select>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-muted-foreground mb-2">
-                WhatsApp
-              </label>
+              <label className="block text-sm font-medium text-muted-foreground mb-2">WhatsApp</label>
               <input
                 type="tel"
                 value={form.whatsapp}
@@ -158,16 +127,30 @@ const ContactForm = () => {
             </div>
 
             <div>
+              <label className="block text-sm font-medium text-muted-foreground mb-2">Tipo de projeto</label>
+              <select
+                value={form.demanda}
+                onChange={(e) => setForm({ ...form, demanda: e.target.value })}
+                className="w-full rounded-lg border border-border bg-secondary/50 px-4 py-3 text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all appearance-none"
+              >
+                <option value="" className="bg-card text-muted-foreground">Selecione uma opção</option>
+                {tiposProjeto.map((d) => (
+                  <option key={d} value={d} className="bg-card text-foreground">{d}</option>
+                ))}
+              </select>
+            </div>
+
+            <div>
               <label className="block text-sm font-medium text-muted-foreground mb-2">
-                Descritivo
+                Descreva rapidamente o projeto <span className="text-muted-foreground/70 font-normal">(opcional)</span>
               </label>
               <textarea
                 value={form.descritivo}
                 onChange={(e) => setForm({ ...form, descritivo: e.target.value })}
-                placeholder="Descreva brevemente o projeto ou a necessidade..."
-                rows={4}
-                maxLength={2000}
-                className="w-full rounded-lg border border-border bg-secondary/50 px-4 py-3 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all resize-y min-h-[100px]"
+                placeholder="Breve descrição do projeto ou necessidade..."
+                rows={3}
+                maxLength={1000}
+                className="w-full rounded-lg border border-border bg-secondary/50 px-4 py-3 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all resize-y"
               />
             </div>
 
@@ -183,15 +166,14 @@ const ContactForm = () => {
               ) : (
                 <>
                   <Send size={18} />
-                  Solicitar proposta técnica
+                  Quero uma proposta técnica em até 24h
                 </>
               )}
             </Button>
 
-            <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground pt-2">
-              <ShieldCheck size={14} className="text-warm" />
-              <span>Seus dados estão seguros. Sigilo total garantido.</span>
-            </div>
+            <p className="text-center text-sm text-muted-foreground pt-2">
+              Resposta em até 24h úteis, sem compromisso.
+            </p>
           </form>
         </motion.div>
       </div>

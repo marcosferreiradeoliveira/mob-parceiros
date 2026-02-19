@@ -1,16 +1,21 @@
 import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
 import processoImage from "@/assets/processo.png";
 
 const steps = [
-  "A agência traz o projeto ou oportunidade",
-  "A Mob desenha a solução técnica",
-  "A agência apresenta ao cliente com sua marca",
-  "A Mob executa em white label",
+  "Você traz o briefing do cliente.",
+  "Desenhamos a solução técnica e uma estimativa em até 24h.",
+  "Você apresenta a proposta com a marca da sua agência.",
+  "Desenvolvemos e suportamos tudo de forma white‑label.",
 ];
 
 const ComoFuncionaSection = () => {
+  const scrollToForm = () => {
+    document.getElementById("formulario")?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
-    <section className="py-24 relative overflow-hidden">
+    <section id="como-funciona" className="py-24 relative overflow-hidden">
       <div className="absolute inset-0 radial-spotlight pointer-events-none opacity-50" />
       <div className="container mx-auto px-4 relative z-10 max-w-[1200px]">
         <motion.div
@@ -20,10 +25,12 @@ const ComoFuncionaSection = () => {
           viewport={{ once: true }}
         >
           <span className="text-sm font-mono text-warm uppercase tracking-widest">Processo</span>
-          <h2 className="text-3xl md:text-4xl font-bold mt-3 mb-4">Como funciona</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mt-3 mb-4">Como funciona na prática</h2>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Você vende, nós entregamos por trás da cortina
+          </p>
         </motion.div>
 
-        {/* Desktop: imagem 50% do tamanho (20% da linha) + texto ao lado; Mobile: imagem em cima, steps embaixo */}
         <div className="flex flex-col lg:flex-row lg:items-center lg:gap-10 gap-8 max-w-[1200px] mx-auto">
           <motion.div
             className="w-full max-w-[50%] lg:max-w-[20%] lg:w-[20%] lg:shrink-0 mx-auto lg:mx-0 rounded-xl overflow-hidden border border-border shadow-xl"
@@ -57,6 +64,17 @@ const ComoFuncionaSection = () => {
             ))}
           </div>
         </div>
+
+        <motion.div
+          className="text-center mt-10"
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          <Button variant="warm" size="lg" onClick={scrollToForm}>
+            Quero avaliar um projeto com vocês
+          </Button>
+        </motion.div>
       </div>
     </section>
   );
