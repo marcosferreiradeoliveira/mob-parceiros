@@ -27,4 +27,11 @@ export const event = (name: string, params?: Record<string, unknown>) => {
   }
 };
 
+/** Rastreia clique no WhatsApp no Mixpanel e no GA4. origem: "header" | "formulario" | "flutuante" */
+export const trackWhatsAppClick = (origem: string) => {
+  event("whatsapp_click", { event_category: "engagement", event_label: origem, origem });
+  const w = window as Window & { mixpanel?: { track: (e: string, p?: Record<string, unknown>) => void } };
+  w.mixpanel?.track("WhatsApp - Clique", { origem });
+};
+
 export { MEASUREMENT_ID };

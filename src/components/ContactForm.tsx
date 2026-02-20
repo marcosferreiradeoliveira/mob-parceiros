@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Send, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+import { trackWhatsAppClick } from "@/lib/analytics";
 
 const tiposProjeto = [
   "Site",
@@ -180,6 +181,7 @@ const ContactForm = () => {
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackWhatsAppClick("formulario")}
               className="mt-4 flex items-center justify-center gap-2 w-full rounded-lg border-2 border-border bg-muted/50 px-4 py-3.5 text-base font-semibold text-foreground transition-all hover:bg-muted hover:border-warm/50 hover:text-warm focus:outline-none focus:ring-2 focus:ring-warm/50"
             >
               <MessageCircle size={22} />

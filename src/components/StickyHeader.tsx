@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
+import { trackWhatsAppClick } from "@/lib/analytics";
 
 const WHATSAPP_URL = "https://wa.me/5521966225632?text=Olá%2C%20gostaria%20de%20saber%20mais%20sobre%20proposta%20técnica.";
 
@@ -38,7 +39,7 @@ const StickyHeader = () => {
           <a href="#como-funciona" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Como funciona</a>
           <a href="#cases" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Cases</a>
           <Button variant="outline" size="sm" asChild>
-            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">Falar no WhatsApp</a>
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" onClick={() => trackWhatsAppClick("header")}>Falar no WhatsApp</a>
           </Button>
           <Button variant="warm" size="sm" onClick={scrollToForm}>
             Quero proposta em até 24h
@@ -64,7 +65,7 @@ const StickyHeader = () => {
               <a href="#como-funciona" onClick={() => setMenuOpen(false)} className="text-muted-foreground hover:text-foreground">Como funciona</a>
               <a href="#cases" onClick={() => setMenuOpen(false)} className="text-muted-foreground hover:text-foreground">Cases</a>
               <Button variant="outline" asChild>
-                <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">Falar no WhatsApp</a>
+                <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" onClick={() => trackWhatsAppClick("header")}>Falar no WhatsApp</a>
               </Button>
               <Button variant="warm" onClick={scrollToForm}>Quero proposta em até 24h</Button>
             </div>
