@@ -11,7 +11,7 @@ const tiposProjeto = [
   "Outro",
 ];
 
-const WHATSAPP_URL = "https://wa.me/5521966225623?text=Olá%2C%20gostaria%20de%20saber%20mais%20sobre%20proposta%20técnica.";
+const WHATSAPP_URL = "https://wa.me/5521966225632?text=Olá%2C%20gostaria%20de%20saber%20mais%20sobre%20proposta%20técnica.";
 
 const ContactForm = () => {
   const [form, setForm] = useState({
