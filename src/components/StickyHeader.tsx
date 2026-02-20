@@ -3,6 +3,8 @@ import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 
+const WHATSAPP_URL = "https://wa.me/5521966225623?text=Olá%2C%20gostaria%20de%20saber%20mais%20sobre%20proposta%20técnica.";
+
 const StickyHeader = () => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -30,11 +32,14 @@ const StickyHeader = () => {
           <span className="text-primary">CONTENT</span>
         </a>
 
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden md:flex items-center gap-4">
           <a href="#dores" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Dores</a>
           <a href="#o-que-fazemos" className="text-sm text-muted-foreground hover:text-foreground transition-colors">O que fazemos</a>
           <a href="#como-funciona" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Como funciona</a>
           <a href="#cases" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Cases</a>
+          <Button variant="outline" size="sm" asChild>
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">Falar no WhatsApp</a>
+          </Button>
           <Button variant="warm" size="sm" onClick={scrollToForm}>
             Quero proposta em até 24h
           </Button>
@@ -58,6 +63,9 @@ const StickyHeader = () => {
               <a href="#o-que-fazemos" onClick={() => setMenuOpen(false)} className="text-muted-foreground hover:text-foreground">O que fazemos</a>
               <a href="#como-funciona" onClick={() => setMenuOpen(false)} className="text-muted-foreground hover:text-foreground">Como funciona</a>
               <a href="#cases" onClick={() => setMenuOpen(false)} className="text-muted-foreground hover:text-foreground">Cases</a>
+              <Button variant="outline" asChild>
+                <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">Falar no WhatsApp</a>
+              </Button>
               <Button variant="warm" onClick={scrollToForm}>Quero proposta em até 24h</Button>
             </div>
           </motion.div>

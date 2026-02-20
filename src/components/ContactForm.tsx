@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Send } from "lucide-react";
+import { Send, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 
@@ -10,6 +10,8 @@ const tiposProjeto = [
   "Multimídia/IA",
   "Outro",
 ];
+
+const WHATSAPP_URL = "https://wa.me/5521966225623?text=Olá%2C%20gostaria%20de%20saber%20mais%20sobre%20proposta%20técnica.";
 
 const ContactForm = () => {
   const [form, setForm] = useState({
@@ -174,6 +176,15 @@ const ContactForm = () => {
             <p className="text-center text-sm text-muted-foreground pt-2">
               Resposta em até 24h úteis, sem compromisso.
             </p>
+            <a
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 flex items-center justify-center gap-2 w-full rounded-lg border-2 border-border bg-muted/50 px-4 py-3.5 text-base font-semibold text-foreground transition-all hover:bg-muted hover:border-warm/50 hover:text-warm focus:outline-none focus:ring-2 focus:ring-warm/50"
+            >
+              <MessageCircle size={22} />
+              Prefere falar direto no WhatsApp? Clique aqui
+            </a>
           </form>
         </motion.div>
       </div>

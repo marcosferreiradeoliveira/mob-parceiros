@@ -1,6 +1,6 @@
 import { MessageCircle } from "lucide-react";
 
-const WHATSAPP_NUMBER = "5511999999999"; // Substitua pelo número real (DDI + DDD + número, sem + ou espaços)
+const WHATSAPP_NUMBER = "5521966225623";
 const DEFAULT_MESSAGE = "Olá! Quero ser parceiro da Mob.";
 
 const FloatingWhatsApp = () => {
